@@ -1,0 +1,48 @@
+//import javax.tools.JavaCompiler
+
+plugins {
+  id("java")
+//  id("org.jetbrains.kotlin.jvm") version "1.9.20"
+  id("org.jetbrains.intellij") version "1.16.0"
+}
+
+group = "cn.thinkinjava"
+version = "1.0.0"
+
+repositories {
+  mavenCentral()
+}
+
+// Configure Gradle IntelliJ Plugin
+// Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
+intellij {
+//  version.set("2023.1.5")
+//  type.set("IC") // Target IDE Platform
+
+  version = "2023.3"
+  type = "IC" // IntelliJ IDEA Community Edition
+  plugins = ['com.intellij.java']  // 无法 import com.intellij.psi.PsiClass  reference：https://blog.csdn.net/q258523454/article/details/121116868
+  updateSinceUntilBuild = false
+}
+
+tasks.withType(JavaCompile.class).configureEach(task -> {
+  task.getOptions().setEncoding("UTF-8")
+  sourceCompatibility = "17"
+  targetCompatibility = "17"
+})
+
+tasks.patchPluginXml {
+  // 2020 ~ 999  reference: https://www.jetbrains.com/zh-cn/idea/download/other.html
+  sinceBuild.set("201")
+//  untilBuild.set("999.*")
+}
+
+tasks.signPlugin {
+  certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
+  privateKey.set(System.getenv("PRIVATE_KEY"))
+  password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+}
+
+tasks.publishPlugin {
+  token.set(System.getenv("PUBLISH_TOKEN"))
+}
