@@ -31,7 +31,7 @@ public class FeignJavaLineMarkerProvider extends RelatedItemLineMarkerProvider {
 //    private static final String POST_MAPPING = "org.springframework.web.bind.annotation.PostMapping";
 //    private static final String PUT_MAPPING = "org.springframework.web.bind.annotation.PutMapping";
 //    private static final String DELETE_MAPPING = "org.springframework.web.bind.annotation.DeleteMapping";
-    private static final List<String> NO_CONTEXT_PATH_APP = Arrays.asList("micro-record");
+//    private static final List<String> NO_CONTEXT_PATH_APP = Arrays.asList("micro-record");
 
     public FeignJavaLineMarkerProvider() {
     }
